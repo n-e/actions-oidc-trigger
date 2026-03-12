@@ -60,6 +60,7 @@ jobs:
 
 - It has the minimal footprint possible
 - It accepts a minimal amount of user input.
+- 100% line coverage, including all the important branches
 - It is secure by default (options such as `showCommandOutput` are disabled by default, filtering by ref and repository must be set)
 
 ### Configuration security considerations

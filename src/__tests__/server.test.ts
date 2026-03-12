@@ -95,6 +95,49 @@ it("gets the env vars", async () => {
   );
 });
 
+it("returns an error on no authorization header", async () => {
+  await withServer(
+    await actionsOidcRouter({
+      currentDate: new Date(1772542140 * 1000),
+      ...singleTrigger({ command: "true" }),
+    }),
+    async ({ baseUrl }) => {
+      const res = await fetch(`${baseUrl}/trigger`, {
+        method: "POST",
+      });
+      expect(res.status).toBe(401);
+      expect(await res.json()).toMatchInlineSnapshot(`
+        {
+          "message": "Missing or invalid authorization header",
+          "status": 401,
+        }
+      `);
+    },
+  );
+});
+
+it("returns an error on a bad authorization header", async () => {
+  await withServer(
+    await actionsOidcRouter({
+      currentDate: new Date(1772542140 * 1000),
+      ...singleTrigger({ command: "true" }),
+    }),
+    async ({ baseUrl }) => {
+      const res = await fetch(`${baseUrl}/trigger`, {
+        method: "POST",
+        headers: { Authorization: "Basic abcd" },
+      });
+      expect(res.status).toBe(401);
+      expect(await res.json()).toMatchInlineSnapshot(`
+        {
+          "message": "Missing or invalid authorization header",
+          "status": 401,
+        }
+      `);
+    },
+  );
+});
+
 it("refuses an expired token", async () => {
   await withServer(
     await actionsOidcRouter({ ...singleTrigger({ command: "true" }) }),
@@ -233,6 +276,28 @@ it("returns an error on a bad repository", async () => {
         {
           "message": "Disallowed repository",
           "status": 403,
+        }
+      `);
+    },
+  );
+});
+
+it("returns a 500 error on internal problems", async () => {
+  await withServer(
+    await actionsOidcRouter({
+      currentDate: new Date(1772542140 * 1000),
+      ...singleTrigger({ command: "true", allowedRepositories: null as any }),
+    }),
+    async ({ baseUrl }) => {
+      const res = await fetch(`${baseUrl}/trigger`, {
+        method: "POST",
+        headers: authHeaders,
+      });
+      expect(res.status).toBe(500);
+      expect(await res.json()).toMatchInlineSnapshot(`
+        {
+          "message": "Internal Error",
+          "status": 500,
         }
       `);
     },

@@ -38,6 +38,7 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "25.2.3",
+    "@vitest/coverage-v8": "^4.0.18",
     "publint": "0.3.17",
     "tsdown": "0.20.0",
     "typescript": "5.9.3",
