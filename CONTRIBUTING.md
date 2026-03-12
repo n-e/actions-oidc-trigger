@@ -4,7 +4,7 @@
 
 ```
 check/update CHANGELOG.md
-npm version minor
 npm publish --dry-run
+npm version minor
 git push --follow-tags
 ```
