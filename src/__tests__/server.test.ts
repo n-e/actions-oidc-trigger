@@ -184,7 +184,7 @@ it("returns an error when exec times out", async () => {
   await withServer(
     await actionsOidcRouter({
       currentDate: new Date(1772542140 * 1000),
-      ...singleTrigger({ commandTimeoutMs: 1, command: 'sleep 10"' }),
+      ...singleTrigger({ commandTimeoutMs: 1, command: "sleep 10" }),
     }),
     async ({ baseUrl }) => {
       const res = await fetch(`${baseUrl}/trigger`, {
