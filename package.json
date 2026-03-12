@@ -1,0 +1,53 @@
+{
+  "name": "actions-oidc-trigger",
+  "version": "0.1.0",
+  "description": "Trigger commands on your server from GitHub Actions, with OIDC authentication",
+  "license": "GPL-3.0-only",
+  "author": "Nicolas Even <nicolas@even.li>",
+  "homepage": "https://github.com/n-e/actions-oidc-trigger",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n-e/actions-oidc-trigger.git"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "bin": {
+    "actions-oidc-trigger": "dist/run.mjs"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.md",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "prepublishOnly": "npm run check && npm run test -- --no-watch && npm run build",
+    "test": "vitest",
+    "check": "tsc"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "25.2.3",
+    "publint": "0.3.17",
+    "tsdown": "0.20.0",
+    "typescript": "5.9.3",
+    "vitest": "4.0.18"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "jose": "^6.2.1",
+    "json5": "^2.2.3",
+    "serialize-error": "^13.0.1",
+    "zod": "^4.3.6"
+  }
+}
