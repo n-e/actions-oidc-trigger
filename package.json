@@ -1,6 +1,6 @@
 {
   "name": "actions-oidc-trigger",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Trigger commands on your server from GitHub Actions, with OIDC authentication",
   "license": "GPL-3.0-only",
   "author": "Nicolas Even <nicolas@even.li>",
