@@ -1,3 +1,7 @@
+# 0.2.0
+
+- Add the `ghcr.io/n-e/actions-oidc-trigger:slim` and `ghcr.io/n-e/actions-oidc-trigger:docker-cli` Docker images
+
 # 0.1.2
 
 No changes (test npm trusted publishing)
