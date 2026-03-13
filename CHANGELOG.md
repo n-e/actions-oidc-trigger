@@ -1,3 +1,7 @@
+# 0.2.1
+
+No changes (fix the publishing workflow)
+
 # 0.2.0
 
 - Add the `ghcr.io/n-e/actions-oidc-trigger:slim` and `ghcr.io/n-e/actions-oidc-trigger:docker-cli` Docker images
