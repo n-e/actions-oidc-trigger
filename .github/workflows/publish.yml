@@ -1,17 +1,19 @@
-name: Publish Package
+name: Publish
 
 on:
   push:
     tags:
       - 'v*'
 
-permissions:
-  id-token: write  # Required for OIDC
-  contents: read
-
 jobs:
-  publish:
+  publish-npm:
+    name: Publish to npm
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write  # Required for OIDC
+      contents: read
+
     steps:
       - uses: actions/checkout@v6
 
@@ -21,3 +23,54 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm publish
+
+  build-publish-docker:
+    name: Build & Push Docker Images
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: docker/setup-buildx-action@v4
+
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: version
+        run: |
+          TAG=$GITHUB_REF_NAME
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$(echo -n "$TAG" | cut -c '2-')" >> "$GITHUB_OUTPUT"
+
+      - name: "Build & Push slim"
+        uses: docker/build-push-action@v7
+        with:
+          tags: |
+            ghcr.io/n-e/actions-oidc-trigger:${{ steps.version.outputs.version }}-slim
+            ghcr.io/n-e/actions-oidc-trigger:slim
+            ghcr.io/n-e/actions-oidc-trigger:latest
+          push: true
+          target: slim
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            TAG=${{ steps.version.outputs.tag }}
+  
+      - name: "Build & Push docker-cli"
+        uses: docker/build-push-action@v7
+        with:
+          tags: |
+            ghcr.io/n-e/actions-oidc-trigger:${{ steps.version.outputs.version }}-docker-cli
+            ghcr.io/n-e/actions-oidc-trigger:docker-cli
+          push: true
+          target: docker-cli
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            TAG=${{ steps.version.outputs.tag }}
+  

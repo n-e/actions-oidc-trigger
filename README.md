@@ -9,7 +9,7 @@ OpenID Connect (OIDC) doesn't require any tokens or configuration, making the se
 On your server, add a `/deploy` endpoint that updates the service Docker image to the one tagged with the commit that triggered the deployment:
 
 ```sh
-npx actions-oidc-trigger --config '{
+docker run ghcr.io/n-e/actions-oidc-trigger --config '{
     triggers: [{
         route: "/deploy",
         command: "docker service update --image yourservice:$SHA yourservice",
@@ -52,6 +52,25 @@ jobs:
         run: |
           curl -XPOST http://your_server:3000/deploy \
             -H "Authorization: Bearer ${{ steps.idtoken.outputs.id_token }}"
+```
+
+## Install
+
+### With Docker
+
+actions-oidc-trigger is available as two images:
+
+- `ghcr.io/n-e/actions-oidc-trigger:slim`: contains only actions-oidc-trigger. Suitable for doing simple actions or as a base for your own images
+
+- `ghcr.io/n-e/actions-oidc-trigger:docker-cli`: contains the docker cli and git. Suitable for triggering docker deployments and pulling gitops repos
+
+See [the package page](https://github.com/n-e/actions-oidc-trigger/pkgs/container/actions-oidc-trigger) for the full list of tags.
+
+### With npm
+
+```sh
+npm i actions-oidc-trigger
+npm exec actions-oidc-trigger --config '{triggers: []}'
 ```
 
 ## Security

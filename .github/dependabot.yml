@@ -24,3 +24,9 @@ updates:
           - minor
           - patch
         dependency-type: production
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    labels: []
+    schedule:
+      interval: "weekly"
