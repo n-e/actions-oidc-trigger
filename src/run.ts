@@ -27,8 +27,8 @@ async function main() {
   const evHandler = () => {
     s.close();
   };
-  s.on("SIGTERM", evHandler);
-  s.on("SIGINT", evHandler);
+  process.on("SIGTERM", evHandler);
+  process.on("SIGINT", evHandler);
 
   console.error(`Listening on port ${cfg.port}`);
 }

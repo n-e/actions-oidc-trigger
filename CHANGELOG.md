@@ -1,3 +1,7 @@
+# 0.2.2
+
+Fix: properly exit when receiving SIGTERM or SIGINT
+
 # 0.2.1
 
 No changes (fix the publishing workflow)
