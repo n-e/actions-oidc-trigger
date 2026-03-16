@@ -62,7 +62,7 @@ actions-oidc-trigger is available as two images:
 
 - `ghcr.io/n-e/actions-oidc-trigger:slim`: contains only actions-oidc-trigger. Suitable for doing simple actions or as a base for your own images
 
-- `ghcr.io/n-e/actions-oidc-trigger:docker-cli`: contains the docker cli and git. Suitable for triggering docker deployments and pulling gitops repos
+- `ghcr.io/n-e/actions-oidc-trigger:docker-cli`: contains the docker cli and other useful tools (see the [Dockerfile](Dockerfile)). Suitable for triggering docker deployments and pulling gitops repos
 
 See [the package page](https://github.com/n-e/actions-oidc-trigger/pkgs/container/actions-oidc-trigger) for the full list of tags.
 

@@ -1,3 +1,7 @@
+# 0.3.0
+
+- Add sops to the `ghcr.io/n-e/actions-oidc-trigger:docker-cli` image
+
 # 0.2.2
 
 Fix: properly exit when receiving SIGTERM or SIGINT

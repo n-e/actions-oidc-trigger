@@ -26,8 +26,12 @@ ARG VERSION_STRING=5:29.2.1-1~debian.13~trixie
 
 RUN apt update \
     && apt install -y \
+    curl \
     docker-ce-cli=$VERSION_STRING \
     git \
     && rm -rf /var/lib/apt/lists/*
+
+ARG TARGETARCH
+RUN curl -L https://github.com/getsops/sops/releases/download/v3.12.1/sops_3.12.1_${TARGETARCH}.deb > sops.deb && dpkg -i sops.deb && rm sops.deb
 
 ENTRYPOINT [ "actions-oidc-trigger" ]
