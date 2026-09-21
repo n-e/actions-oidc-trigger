@@ -33,7 +33,6 @@ const getBearer = (req: Request): string | null => {
 const matchWildcard = (pattern: string, haystack: string) => {
   const unanchored = pattern
     .split("*")
-    // @ts-expect-error -- the types aren't supported yet in ts 5.9.3
     .map((x) => RegExp.escape(x))
     .join(".*");
   const re = new RegExp(`^${unanchored}$`);
@@ -121,9 +120,11 @@ export const actionsOidcRouter = async ({
       status: number,
       data: Record<string, unknown>,
       extra: {
-        execResult?: Pick<
-          ExecException,
-          "cmd" | "code" | "killed" | "signal" | "stderr" | "stdout"
+        execResult?: Partial<
+          Pick<
+            ExecException,
+            "cmd" | "code" | "killed" | "signal" | "stderr" | "stdout"
+          >
         >;
         error?: unknown;
         env?: Record<string, unknown>;
