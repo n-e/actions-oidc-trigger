@@ -7,6 +7,8 @@ updates:
     labels: []
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "npm"
     directory: "/"
@@ -24,9 +26,13 @@ updates:
           - minor
           - patch
         dependency-type: production
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "docker"
     directory: "/"
     labels: []
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
