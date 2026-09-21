@@ -1,3 +1,7 @@
+# 0.3.1
+
+- Update to Node 26 in the Docker image and update all dependencies
+
 # 0.3.0
 
 - Add sops to the `ghcr.io/n-e/actions-oidc-trigger:docker-cli` image
