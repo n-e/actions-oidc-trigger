@@ -37,12 +37,12 @@
   },
   "devDependencies": {
     "@types/express": "5.0.6",
-    "@types/node": "26.6.2",
-    "@vitest/coverage-v8": "5.0.1",
+    "@types/node": "26.6.3",
+    "@vitest/coverage-v8": "5.0.3",
     "publint": "0.3.24",
     "tsdown": "0.23.0",
     "typescript": "7.0.2",
-    "vitest": "5.0.1"
+    "vitest": "5.0.3"
   },
   "dependencies": {
     "express": "^5.2.1",
