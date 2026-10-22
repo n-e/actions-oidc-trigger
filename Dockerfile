@@ -1,4 +1,4 @@
-FROM node:26.9.0-trixie-slim AS base
+FROM node:26.11.1-trixie-slim AS base
 
 ARG TAG
 
